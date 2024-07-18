@@ -25,4 +25,8 @@ class UserController extends Controller
             "user"=> $user,
         ], 200);
     }
+
+    public function store( Request $request){
+        dd($request);
+    }
 }
