@@ -2,10 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Usercontroller;
 
-Route::get('/users', function (Request $request) {
-    return response()->json([
-        "status"=> true,
-        "message"=> 'listar Usuários',
-    ],200);
-});
+
+Route::get("/users", [UserController::class, "index"]);
