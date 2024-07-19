@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UserResquest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        // Recuperar o id do Usuário enviado na Url
+        $userId = $this->route("user");
+        //Retornar os níveis de erros
+        return [
+           "name"=> "required",
+           "email"=>"required|unique:users, email|email".($userId ? $userId->id : null),
+           "password"=> "required|min:6"
+        ];
+    }
+
+    // Tratamento de erro nas mensagens 
+
+    public function messages():array{
+        return [
+            "name.required"=> "O Campo nome é obrigatório!",
+            "email.required"=>"O Campo e-mial é Obrigatório!",
+            "email.email"=>"Precisa de Mandar um email válido!",
+            "email.unique"=>"O e-mail já está casatrado!",
+            "password.required"=> "A senha é obrigatória",
+            "password.min"=> "a senha deve ter no mínimo 6 dígitos",
+        ];
+    }
+
+    //Manipular Falha de validação e retornar uma resposta JSON com os erros Válidos
+}
