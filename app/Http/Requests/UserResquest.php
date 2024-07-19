@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class UserResquest extends FormRequest
 {
     /**
@@ -19,6 +20,23 @@ class UserResquest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+
+      /**
+     * Get the validation rules that apply to the request.
+     * @throws \ Illuminate\Http\Exceptions\HttpResponseException;
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+
+     protected function failedValidation(Validator $validator){
+        throw new HttpResponseException(response()->json([
+
+            "status"=> false,
+            "erros"=>$validator ->errors()
+        ],422));
+    }
+
+
     public function rules(): array
     {
         // Recuperar o id do Usuário enviado na Url
@@ -45,4 +63,6 @@ class UserResquest extends FormRequest
     }
 
     //Manipular Falha de validação e retornar uma resposta JSON com os erros Válidos
+
+  
 }

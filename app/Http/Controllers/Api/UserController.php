@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +30,7 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function store(Request $request){
+    public function store(UserRequest $request){
 
         //iniciar a transação
         DB::beginTransaction();
