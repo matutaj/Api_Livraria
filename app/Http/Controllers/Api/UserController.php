@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Http\Response;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
