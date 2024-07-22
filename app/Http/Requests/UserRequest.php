@@ -61,7 +61,7 @@ class UserRequest extends FormRequest
             "email.email"=>"Precisa de Mandar um email válido!",
             "email.unique"=>"O e-mail já está casatrado!",
             "password.required"=> "A senha é obrigatória",
-            "password.min"=> "a senha deve ter no mínimo 6 dígitos",
+            "password.min"=> "a senha deve ter no mínimo :min dígitos",
         ];
     }
 
