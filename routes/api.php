@@ -8,3 +8,4 @@ use App\Http\Controllers\Api\Usercontroller;
 Route::get("/users", [UserController::class, "index"]); //Traz todos os dados de forma paginada
 Route::get("/users/{user}", [UserController::class, "show"]);// Lista ou apresenta apenas o usuário pelo o Id do usuário.
 Route::post("/users", [UserController::class, "store"]);
+Route::put("/users/{user}", [UserController::class, "update"]);

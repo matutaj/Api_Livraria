@@ -64,4 +64,12 @@ class UserController extends Controller
         }
        
     }
+
+    public function update(UserRequest $request,  User $user){
+        return response()->json([
+            "status"=> true,
+            "user"=>$request,
+            "message"=>"Usuário Editado com sucesso"
+        ], 200);
+    }
 }
