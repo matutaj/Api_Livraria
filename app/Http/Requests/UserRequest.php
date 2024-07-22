@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 
-class UserResquest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,15 @@ class UserResquest extends FormRequest
      * @throws \ Illuminate\Http\Exceptions\HttpResponseException;
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    
+    //Manipular Falha de validação e retornar uma resposta JSON com os erros Válidos
+    protected function failedValidation(Validator $validator){
+        throw new HttpResponseException(response()->json([
 
+            "status"=> false,
+            "erros"=>$validator ->errors()
+        ],422));
+    }
    
 
     public function rules(): array
@@ -39,7 +47,7 @@ class UserResquest extends FormRequest
         //Retornar os níveis de erros
         return [
            "name"=> "required",
-           "email"=>"required|unique:users, email|email".($userId ? $userId->id : null),
+           "email"=>"required|email|unique:users,email".($userId ? $userId->id : null),
            "password"=> "required|min:6"
         ];
     }
@@ -57,15 +65,4 @@ class UserResquest extends FormRequest
         ];
     }
 
-    //Manipular Falha de validação e retornar uma resposta JSON com os erros Válidos
-    protected function failedValidation(Validator $validator){
-        throw new HttpResponseException(response()->json([
-
-            "status"=> false,
-            "erros"=>$validator ->errors()
-        ],422));
-    }
-
-
-  
 }
