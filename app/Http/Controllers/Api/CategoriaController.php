@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -13,7 +15,7 @@ class CategoriaController extends Controller
 
     public function index(){
 
-        $categorias = Categoria::orderBy("id", "nome")->get();
+        $categorias = Categoria::orderBy("id", "DESC")->get();
 
         return response()->json([
             "status"=>true,
@@ -22,7 +24,7 @@ class CategoriaController extends Controller
 
     }
 
-    public function store(Request $request){
+    public function store(CategoriaRequest $request){
 
             DB::beginTransaction();
 
@@ -36,7 +38,7 @@ class CategoriaController extends Controller
                 return response()->json([
                     "status"=>true,
                     "message"=>"Salvo com sucesso",
-                ],200);
+                ],201);
 
             }catch(Exception $e){
                 DB::rollBack();

@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Usercontroller;
-use App\Htpp\Controllers\Api\CategoriaController;
+use App\Http\Controllers\Api\CategoriaController;
 
 //Rotas do Usuário
 Route::get("/users", [UserController::class, "index"]); //Traz todos os dados de forma paginada
@@ -12,4 +12,5 @@ Route::post("/users", [UserController::class, "store"]);
 Route::put("/users/{user}", [UserController::class, "update"]);
 
 //Rotas da Categoria
-Route::post("/categoria", [CategoriaController::class, "store"]);
+Route::post("/categorias", [CategoriaController::class, "store"]);
+Route::get("/categorias",[CategoriaController::class, "index"]);
