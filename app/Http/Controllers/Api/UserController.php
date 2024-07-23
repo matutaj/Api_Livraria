@@ -66,10 +66,29 @@ class UserController extends Controller
     }
 
     public function update(UserRequest $request,  User $user){
+
+        //iniciar a transation
+       DB::beginTransaction();
+
+       try{
+
+        
         return response()->json([
             "status"=> true,
-            "user"=>$request,
+            "user"=>$user,
             "message"=>"Usuário Editado com sucesso"
         ], 200);
+
+       }catch(Exception $e){
+        DB::rollBack();
+
+        //Retorna uma mensagem de erro com status 400
+
+        return response()->json([
+            "status"=> false,
+            "message"=>"Usuário Não editado",
+        ], 400);
+    }
+
     }
 }
