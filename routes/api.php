@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Usercontroller;
 use App\Http\Controllers\Api\CategoriaController;
+use App\Http\Controllers\Api\LoginController;
+
+//Rota Login
+Route::post('/login', [LoginController::class, "login"]);
 
 //Rotas do Usuário
 Route::get("/users", [UserController::class, "index"]); //Traz todos os dados de forma paginada
