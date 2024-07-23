@@ -16,6 +16,9 @@ Route::post("/users", [UserController::class, "store"]);
 Route::put("/users/{user}", [UserController::class, "update"]);
 
 //Rotas da Categoria
-Route::post("/categorias", [CategoriaController::class, "store"]);
-Route::get("/categorias",[CategoriaController::class, "index"]);
-Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]);
+//Permissão de acesso
+Route::group(["middlewre"=> ["auth:sanctum"], function(){
+    Route::post("/categorias", [CategoriaController::class, "store"]);
+    Route::get("/categorias",[CategoriaController::class, "index"]);
+    Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
+}]);
