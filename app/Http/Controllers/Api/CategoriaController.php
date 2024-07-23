@@ -50,4 +50,24 @@ class CategoriaController extends Controller
             }
 
     }
+    public function update(CategoriaRequest $request, Categorias $categoria){
+
+        DB::beginTransaction();
+
+        try{
+            return response()->json([
+                "status"=>true,
+                "categoria"=>$categoria,
+                "message"=>"Categoria Editada com sucesso",
+            ],200);
+        }catch(exception $e){
+            DB::rollBack();
+
+            return respose()->json([
+                "status"=>false,
+                "message"=>"Categoria Não editada"
+            ],400);
+        }
+
+    }
 }
