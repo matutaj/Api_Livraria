@@ -9,6 +9,13 @@ use App\Http\Controllers\Api\LoginController;
 //Rota Login
 Route::post('/login', [LoginController::class, "login"])->name("login");
 
+//Recuperar a Senha de Usuário
+Route::post("/forgot-password-code", [RecuperarSenhaController::class, "forgotPasswordCode"]);
+//rota para validar se o código de confirmalção está correto.
+Route::post("/reset-password-validate-code",[RecuperarSenhaController::class,"resetPasswordValidatecode"]);
+//Rota para atualizar os dados do Usuário
+Route::post("/reset-password-code", [RecuperarSenhaController::class. "resetPasswordCode"]);
+
 //Rotas do Usuário
 Route::get("/users", [UserController::class, "index"]); //Traz todos os dados de forma paginada
 Route::get("/users/{user}", [UserController::class, "show"]);// Lista ou apresenta apenas o usuário pelo o Id do usuário.
