@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\LoginController;
 
 //Rota Login
-Route::post('/login', [LoginController::class, "login"]);
+Route::post('/login', [LoginController::class, "login"])->name("login");
 
 //Rotas do Usuário
 Route::get("/users", [UserController::class, "index"]); //Traz todos os dados de forma paginada
@@ -17,8 +17,10 @@ Route::put("/users/{user}", [UserController::class, "update"]);
 
 //Rotas da Categoria
 //Permissão de acesso
-Route::middleware(["middleware" => ["auth:sanctum"], function(){
-    Route::post("/categorias", [CategoriaController::class, "store"]);
-    Route::get("/categorias",[CategoriaController::class, "index"]);
-    Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
-}]);
+Route::middleware("auth:sanctum")->group(
+    function(){
+        Route::post("/categorias", [CategoriaController::class, "store"]);
+        Route::get("/categorias",[CategoriaController::class, "index"]);
+        Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
+    }
+);
