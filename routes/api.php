@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Usercontroller;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RecuperarSenhaController;
 
 //Rota Login
 Route::post('/login', [LoginController::class, "login"])->name("login");
