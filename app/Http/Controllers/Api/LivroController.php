@@ -12,7 +12,12 @@ class LivroController extends Controller
 {
     //
     public function index(){
+        $livros = Livro::orderBy("id", "DESC")->get();
 
+        return response()->json([
+            "status"=>true,
+            "livros"=> $livros
+        ],200);
     }
 
     public function store(Request $request){
