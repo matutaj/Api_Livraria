@@ -5,9 +5,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Usercontroller;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RecuperarSenhaController;
 
 //Rota Login
-Route::post('/login', [LoginController::class, "login"]);
+Route::post('/login', [LoginController::class, "login"])->name("login");
+
+//Recuperar a Senha de Usuário
+Route::post("/forgot-password-code", [RecuperarSenhaController::class, "forgotPasswordCode"]);
+//rota para validar se o código de confirmalção está correto.
+Route::post("/reset-password-validate-code",[RecuperarSenhaController::class,"resetPasswordValidatecode"]);
+//Rota para atualizar os dados do Usuário
+Route::post("/reset-password-code", [RecuperarSenhaController::class. "resetPasswordCode"]);
 
 //Rotas do Usuário
 Route::get("/users", [UserController::class, "index"]); //Traz todos os dados de forma paginada
@@ -17,8 +25,10 @@ Route::put("/users/{user}", [UserController::class, "update"]);
 
 //Rotas da Categoria
 //Permissão de acesso
-Route::middleware(["middleware" => ["auth:sanctum"], function(){
-    Route::post("/categorias", [CategoriaController::class, "store"]);
-    Route::get("/categorias",[CategoriaController::class, "index"]);
-    Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
-}]);
+Route::middleware("auth:sanctum")->group(
+    function(){
+        Route::post("/categorias", [CategoriaController::class, "store"]);
+        Route::get("/categorias",[CategoriaController::class, "index"]);
+        Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
+    }
+);
