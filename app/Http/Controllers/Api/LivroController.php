@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -22,25 +23,19 @@ class LivroController extends Controller
 
     public function store(Request $request){
         DB::beginTransaction();
-
+        
         try{
-            $livro = Livro::create([
-                "nome"=>$request->nome,
-                "descricao"=>$request->descricao,
-                "preco"=>$request->preco,
-                "edicao"=>$request->edicao,
-                "autor"=>$request->autor,
-                "dataLancamente"=>$request->dataLancamento,
-                "quantidade"=>$request->quantidade,
-                "imagem"=>$request->imagem,
-            ]);
+
+            $livro = Livro::create($request->all());
             DB::commit();
 
             return response()->json([
                 "status"=>true,
+                "livro"=>$livro,
                 "message"=> "Salvo com sucesso",
             ], 201);
-        }catch( Exception $e){
+            
+        }catch(Exception $e){
             DB::rollBack();
 
             return response()->json([

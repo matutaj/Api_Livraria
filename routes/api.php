@@ -28,8 +28,8 @@ Route::put("/users/{user}", [UserController::class, "update"]);
 //Permissão de acesso
 Route::middleware("auth:sanctum")->group(
     function(){
-        Route::post("/categorias", [CategoriaController::class, "store"]);
         Route::get("/categorias",[CategoriaController::class, "index"]);
+        Route::post("/categorias", [CategoriaController::class, "store"]);
         Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
     }
 );
