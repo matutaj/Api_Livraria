@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Request\ResetPasswordCodeRequest;
+use App\Http\Request\ResetPasswordValidateCodeRequest;
 use App\Http\Mail\SendEmailForgotPasswordCode;
 use App\Models\User;
 use Carbon\Carbon;
