@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Usercontroller;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RecuperarSenhaController;
+use App\Http\Controllers\Api\LivroController;
 
 //Rota Login
 Route::post('/login', [LoginController::class, "login"])->name("login");
@@ -27,8 +28,12 @@ Route::put("/users/{user}", [UserController::class, "update"]);
 //Permissão de acesso
 Route::middleware("auth:sanctum")->group(
     function(){
-        Route::post("/categorias", [CategoriaController::class, "store"]);
         Route::get("/categorias",[CategoriaController::class, "index"]);
+        Route::post("/categorias", [CategoriaController::class, "store"]);
         Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
     }
 );
+
+// Rotas para livro
+Route::post("/livro",[LivroController::class, "store"]);
+Route::get("/livro",[LivroController::class, "index"]);
