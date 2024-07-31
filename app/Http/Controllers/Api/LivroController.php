@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Livro;
+use App\Http\Requests\LivroRequest;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -21,7 +21,7 @@ class LivroController extends Controller
         ],200);
     }
 
-    public function store(Request $request){
+    public function store(LivroRequest $request){
         DB::beginTransaction();
         
         try{
