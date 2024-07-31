@@ -42,3 +42,4 @@ Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]);
 // Rotas para livro
 Route::post("/livro",[LivroController::class, "store"]);
 Route::get("/livro",[LivroController::class, "index"]);
+Route::put("/livro/{id}", [LivroController::class, "update"]);
