@@ -41,6 +41,7 @@ class LivroController extends Controller
             return response()->json([
                 "status"=>false,
                 "message"=>"Erro ao salvar o livro",
+                "errors"=> $e->getMessage(),
             ], 400);
         }
     }
