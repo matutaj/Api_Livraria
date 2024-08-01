@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RecuperarSenhaController;
 use App\Http\Controllers\Api\LivroController;
+use App\Http\Controllers\Api\VendaController;
 
 //Rota Login
 Route::post('/login', [LoginController::class, "login"])->name("login");
@@ -42,3 +43,7 @@ Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]);
 // Rotas para livro
 Route::post("/livro",[LivroController::class, "store"]);
 Route::get("/livro",[LivroController::class, "index"]);
+
+//rotas para Venda
+Route::get("/venda", [VendaController::class, "index"]);
+Route::post("/venda", [VendaController::class, "store"]);
