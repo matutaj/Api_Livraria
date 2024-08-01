@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Venda;
-use Illuminate\support\Facades\DB;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\VendaRequest;
+use App\Models\Livro;
 use Exception;
 
 class VendaController extends Controller
@@ -20,11 +21,14 @@ class VendaController extends Controller
         ], 200);
     }
 
-    public function store(Request $request){
+    public function store(VendaRequest $request){
         DB::beginTransaction();
 
+       // $valordoLivro =Livro::find($request->livroId); 
         try{
-            $venda = Venda::create($request->all());
+            $venda = Venda::create(
+                $request->all(),
+            );
             DB::commit();
 
             return response()->json([
