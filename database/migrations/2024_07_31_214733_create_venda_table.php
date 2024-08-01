@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer("quantidade");
             $table->double("valorPago");
-            $table->foreignId("userId")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreignId("livroId")->references("id")->on("livros")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("userId");
+            $table->foreign("userId")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("livroId");
+            $table->foreign("livroId")->references("id")->on("livros")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }
