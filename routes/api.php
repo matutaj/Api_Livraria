@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RecuperarSenhaController;
 use App\Http\Controllers\Api\LivroController;
-use App\Http\Controller\Api\VendaController;
+use App\Http\Controllers\Api\VendaController;
 
 //Rota Login
 Route::post('/login', [LoginController::class, "login"])->name("login");

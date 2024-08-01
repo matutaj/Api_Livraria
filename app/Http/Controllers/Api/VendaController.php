@@ -12,7 +12,7 @@ class VendaController extends Controller
 {
     //
     public function index(){
-        $vendas = Venda::ordeBy("id", "DESC")->get();
+        $vendas = Venda::orderBy("id", "DESC")->get();
 
         return response()->json([
             "status"=> true,
