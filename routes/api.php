@@ -28,7 +28,7 @@ Route::put("/users/{user}", [UserController::class, "update"]);
 //Rotas da Categoria
 Route::get("/categorias",[CategoriaController::class, "index"]);
 Route::post("/categorias", [CategoriaController::class, "store"]);
-Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
+Route::put("/categorias/{id}",[CategoriaController::class, "update"]); 
 
 
 //Permissão de acesso
@@ -43,6 +43,7 @@ Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]);
 // Rotas para livro
 Route::post("/livro",[LivroController::class, "store"]);
 Route::get("/livro",[LivroController::class, "index"]);
+Route::put("/livro/{id}", [LivroController::class, "update"]);
 
 //rotas para Venda
 Route::get("/venda", [VendaController::class, "index"]);

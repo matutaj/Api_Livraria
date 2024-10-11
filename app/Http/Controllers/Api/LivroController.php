@@ -45,4 +45,25 @@ class LivroController extends Controller
             ], 400);
         }
     }
+
+    public function update(LivroRequest $request,Livro $id){
+        DB::beginTransaction();
+
+        try{
+           return response()->json([
+            "status"=>true,
+            "livro"=>$id,
+            "message"=> "Livro atualizado com Sucesso!"
+           ],200);
+            
+        }catch(Exception $e ){
+            DB::rollBack();
+
+            return response()->json([
+                "status"=>false,
+                "message"=>"Erro ao atutalizar o livro",
+                "errors"=> $e->getMessage(),
+            ], 400);
+        }
+    }
 }
