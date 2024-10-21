@@ -28,7 +28,7 @@ Route::put("/users/{user}", [UserController::class, "update"]);
 //Rotas da Categoria
 Route::get("/categorias",[CategoriaController::class, "index"]);
 Route::post("/categorias", [CategoriaController::class, "store"]);
-Route::put("/categorias/{id}",[CategoriaController::class, "update"]); 
+Route::put("/categorias/{categoria}",[CategoriaController::class, "update"]); 
 
 
 //Permissão de acesso

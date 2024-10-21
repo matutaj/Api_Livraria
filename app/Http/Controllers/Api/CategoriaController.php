@@ -7,6 +7,7 @@ use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 use Exception;
 
 class CategoriaController extends Controller
@@ -50,22 +51,24 @@ class CategoriaController extends Controller
             }
 
     }
-    public function update(CategoriaRequest $request, Categorias $categoria){
+    public function update(CategoriaRequest $request, Categoria $categoria){
 
         DB::beginTransaction();
 
         try{
+
             return response()->json([
                 "status"=>true,
                 "categoria"=>$categoria,
                 "message"=>"Categoria Editada com sucesso",
             ],200);
         }catch(exception $e){
+         
             DB::rollBack();
-
-            return respose()->json([
+             return respose()->json([
                 "status"=>false,
-                "message"=>"Categoria Não editada"
+                "message"=>"Categoria Não editada",
+                "errors"=> $e->getMessage()
             ],400);
         }
 

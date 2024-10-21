@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Resources\Json\JsonResponse;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -65,14 +65,20 @@ class UserController extends Controller
        
     }
 
-    public function update(UserRequest $request,  User $user){
+    public function update(UserRequest $request,  User $user): JsonResponse{
 
         //iniciar a transation
        DB::beginTransaction();
 
        try{
-
+        $user -> update([
+            "name"=> $request->name,
+            "email"=>$request->email,
+            "password"=>$request->password,
+        ]);
         
+        DB::commit();
+
         return response()->json([
             "status"=> true,
             "user"=>$user,
@@ -87,6 +93,7 @@ class UserController extends Controller
         return response()->json([
             "status"=> false,
             "message"=>"Usuário Não editado",
+             "errors"=> $e->getMessage()
         ], 400);
     }
 
